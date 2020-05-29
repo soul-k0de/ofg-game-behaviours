@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Treading
 
 public class moveHero : MonoBehaviour
@@ -19,13 +19,17 @@ public class moveHero : MonoBehaviour
         //float moveX = Input.GetAxis("Horizontal");
         //rb.MovePosition(rb.position + Vector2.right * moveX * speed * Time.deltaTime);
         float moveX = Input.GetAxis("Horizontal");
+        // Коэффициент
+        float i = 50
         while (moveX != 0f, speed > 0f );
-        {if (moveX == 0f,) ;
+        {if (moveX == 0f, speed > 4) ;
             {
                 // Экстренное торможение при высокой скорости    
                 while (speed != 0f) ;
                 {
-                    Tread.Sleep(500)
+                    // Время скольжения
+                    time_sleep = i * speed
+                    Tread.Sleep(time_sleep)
                     speed = speed - 1f
                 }
             }
