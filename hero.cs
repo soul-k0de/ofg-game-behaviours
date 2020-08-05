@@ -13,6 +13,7 @@ public class hero : MonoBehaviour
     public AudioClip sound2;
     public AudioClip sound3;
     public AudioClip sound4;
+    public string nextlevel;
     private bool checkjump = false;
     public bool grounded = true;
     private bool checksound = true;
@@ -49,6 +50,10 @@ public class hero : MonoBehaviour
         //}
     //}
 //______________________________________________________
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(nextlevel);
+    }
     void Update()
     {
         // Рывок вниз
@@ -71,7 +76,7 @@ public class hero : MonoBehaviour
         //}
     //}
  //______________________________________________________
-    void PushDown()
+ void PushDown()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow) && grounded == false)
         {
