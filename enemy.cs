@@ -8,7 +8,6 @@ public class enemy : MonoBehaviour
     private Rigidbody2D _rb;
     public int enemyhealth = 50;
     int currentenemyhp;
-    public GameObject coin;
     public Transform _tr;
     public Transform _herotransform;
     private Collider2D _coll;

@@ -9,10 +9,6 @@ public class hero : MonoBehaviour
     public float speed = 12f;
     public float jumpHeight = 10f;
     //public float normalMass;
-    public AudioClip sound1;
-    public AudioClip sound2;
-    public AudioClip sound3;
-    public AudioClip sound4;
     public string nextlevel;
     private bool checkjump = false;
     public bool grounded = true;
@@ -21,8 +17,6 @@ public class hero : MonoBehaviour
     private bool checkaxis;
     // private Transform _transform;
     private Rigidbody2D _rb;
-    private AudioSource _audiosrc;
-    public float normalspeed;
     //public GameObject restart;
     //public float currentposY;
     //public float currentposX; 
@@ -30,8 +24,6 @@ public class hero : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _audiosrc = GetComponent<AudioSource>();
-        normalspeed = speed;
     }
 
     // Update is called once per frame
@@ -81,7 +73,6 @@ public class hero : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) && grounded == false)
         {
             _rb.AddForce(transform.up * -30f , ForceMode2D.Impulse);
-            _audiosrc.PlayOneShot(sound2);
             checkdash = true;
             //checksound = false;
         }
@@ -96,16 +87,13 @@ public class hero : MonoBehaviour
             jumpCount = 0;
             checkjump = false;
             //_rb.mass = normalMass;
-            if (checksound == true)
-            {
-                _audiosrc.PlayOneShot(sound3);
-            }
-            checksound = false;
-            if (checkdash == true)
-            {
-                _audiosrc.PlayOneShot(sound4);
-                checkdash = false;
-            }
+            //if (checksound == true)
+            //{
+            //}
+            //checksound = false;
+            //if (checkdash == true)
+            //{
+            //}
         }
 
         //if (collider.gameObject.tag == "Respawn")
@@ -124,7 +112,6 @@ public class hero : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && jumpCount < maxJumps)
         {
             _rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
-            _audiosrc.PlayOneShot(sound1);
             jumpCount = jumpCount + 1;
             Debug.Log(jumpCount);
             grounded = false;
