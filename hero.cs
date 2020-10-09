@@ -4,48 +4,41 @@ using UnityEngine;
 
 public class hero : MonoBehaviour
 {
-    private int maxJumps = 2;
+    // Максимальное кол-во прыжков 
+    private int maxJumps = 2; 
+    //public int plusbullets = 1; 
+    // Кол-во прыжков
     private int jumpCount = 0;
+    // Скорость
     public float speed = 12f;
+    // Высота прыжка
     public float jumpHeight = 10f;
-    //public float normalMass;
-    public string nextlevel;
+    // Проверка прыжка
     private bool checkjump = false;
+    // Булевая переменная для показания приземнелия
     public bool grounded = true;
+    // Булевая переменная для проверки звука 
     private bool checksound = true;
     private bool checkdash = false;
     private bool checkaxis;
-    // private Transform _transform;
+    // Риджидбоди (Физические свой-ва)
     private Rigidbody2D _rb;
-    //public GameObject restart;
-    //public float currentposY;
-    //public float currentposX; 
-    //private BoxCollider2D _boxcol2d;
+    
+    // Метод Start
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
+    
 //______________________________________________________
-    //void FreeFall()
-    //{
-      //  while (grounded != true)
-        //{
-          //  _rb.mass += 0.5f;
-            //Debug.Log(_rb.mass);
-        //}
-        //if (grounded == true)
-        //{
-          //  _rb.mass = normalMass;
-            //Debug.Log(_rb.mass);
-        //}
-    //}
-//______________________________________________________
-    public void LoadNextLevel()
+    
+    // Загрузка следующего уровня
+    public void LoadNextLevel(string level)
     {
-        SceneManager.LoadScene(nextlevel);
+        SceneManager.LoadScene(level);
     }
+    
+    // Передвижение и развороты в методе Update
     void Update()
     {
         // Рывок вниз
@@ -54,20 +47,10 @@ public class hero : MonoBehaviour
         Flip();
         // Прыжок
         Jump();
-        // Свободное падение
-        //FreeFall();
     }
-   //void Restart()
-   //{
-        //currentposX = _transform.localPosition.x;
-        //currentposY = _transform.localPosition.y;
-        //if (currentposY < -11f)
-        //{ 
-            //currentposX = restart.transform.localPosition.x;
-            //currentposY = restart.transform.localPosition.y;
-        //}
-    //}
- //______________________________________________________
+
+ 
+ //Рывок вниз
  void PushDown()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow) && grounded == false)
@@ -78,7 +61,8 @@ public class hero : MonoBehaviour
         }
     }
 //______________________________________________________
-
+    
+    // Столкновение с колизией
     void OnCollisionEnter2D(Collision2D collider)
     {
         if (collider.gameObject.tag == "Ground")
@@ -86,33 +70,25 @@ public class hero : MonoBehaviour
             grounded = true;
             jumpCount = 0;
             checkjump = false;
-            //_rb.mass = normalMass;
-            //if (checksound == true)
-            //{
-            //}
-            //checksound = false;
-            //if (checkdash == true)
-            //{
-            //}
         }
-
-        //if (collider.gameObject.tag == "Respawn")
-        //{
-        //}
     }
 //______________________________________________________
+    
+    //Передвижение по оси X
     void FixedUpdate()
     {
         _rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, _rb.velocity.y);
     }
 //______________________________________________________
-
+    
+    // Прыжок
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) && jumpCount < maxJumps)
         {
             _rb.AddForce(transform.up * jumpHeight, ForceMode2D.Impulse);
             jumpCount = jumpCount + 1;
+            // Показатель кол-ва прыжков
             Debug.Log(jumpCount);
             grounded = false;
             checksound = true;
@@ -120,10 +96,13 @@ public class hero : MonoBehaviour
         }
         if (grounded == true) 
         {
+            //
             jumpCount = 0;
         }
     }
 //______________________________________________________
+
+    //Разворот
     void Flip()
     {
         if (Input.GetAxis("Horizontal") < 0)
@@ -135,17 +114,4 @@ public class hero : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0f, 0f,0f);
         }
     }
-
-    //void Dash()
-    //{
-      //  if (Input.GetKeyDown(KeyCode.A))
-        //{
-          //  _rb.AddForce(transform.right * -20f, ForceMode2D.Impulse);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-          //  _rb.AddForce(transform.right * 20f, ForceMode2D.Impulse);
-        //}
-    //}
 }
