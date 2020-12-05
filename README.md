@@ -1,2 +1,2 @@
 # ofg-game-behaviours
-All behavior for game's sprites and tiles (Not for production!)
+All behavior for game's scripts (Not for production!)
